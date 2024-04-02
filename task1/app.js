@@ -1,9 +1,14 @@
 // Round value before returning result
 function roundValue(inputValue) {
-    let string = inputValue.toString();
-    let value = string.split('.');
-    let head = parseInt(value[0]);
-    let tail = parseFloat('0.' + value[1]);
+    let stringValue = inputValue.toString();
+    let decimalIndex = stringValue.indexOf('.');
+
+    if (decimalIndex === -1) {
+        return stringValue;
+    }
+
+    let head = parseInt(stringValue.substring(0, decimalIndex));
+    let tail = parseInt(stringValue.substring(decimalIndex + 1));
 
     if (tail >= 5) {
         head += 1;
@@ -21,10 +26,12 @@ function operate (value1, operator, value2) {
         switch (operator){
             case '+':
                 result = first + second;
+                console.log('Success plus');
                 break;
             case '-':
-                if (first > second){
+                if (first >= second){
                     result = first - second;
+                    console.log('Success minus');
                 }
                 else {
                     console.log('Error! First number must be bigger than second to operate this.');
@@ -32,8 +39,9 @@ function operate (value1, operator, value2) {
                 }
                 break;
             case '/':
-                if (first > second){
+                if (first >= second){
                     result = first / second;
+                    console.log('Success divide');
                 }
                 else {
                     console.log('Error! First number must be bigger than second to operate this.');
@@ -42,9 +50,10 @@ function operate (value1, operator, value2) {
                 break;
             case '*':
                 result = first * second;
+                console.log('Success mult');
         }
 
-        return roundValue(result);
+        return roundValue(result.toString());
     } catch (e) {
         console.log(`Error while operating numbers. \n ${e}`);
     }
@@ -66,6 +75,13 @@ String.prototype.divide = function(value) {
 
 // Tests
 console.log("Plus: " + "140".plus("450"));
-console.log("Minus: " + "1000".minus("120"));
+console.log("Minus: " + "10".minus("10"));
 console.log("Multiply: " + "5".multiply("6"));
-console.log("Divide: " + "1000".divide("25"));
+console.log("Divide: " + "5".divide("5"));
+//MORE
+console.log("Plus2: " + "900899999999999999999999999999999999999999999999999999999999999999999".plus("1"));
+console.log("Minus2: " + "30000000000000000000000000000000000000000000000000000000000000000000".minus("3"));
+console.log("Multiply2: " + "999999999999999999999999999999999999999999995655555555555659".multiply("8"));
+console.log("Divide2: " + "26666666666666666666666666666666666666666666666666666666666666".divide("2"));
+
+

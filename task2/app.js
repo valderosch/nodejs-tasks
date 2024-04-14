@@ -1,8 +1,17 @@
 const Task2Lib = {
     addValues: function (first = "JS", second = "Land") {
         try{
-            if(typeof first && second === 'number'){
-                return first + second;
+            if(typeof first === 'number' || typeof second === 'number'){
+                if(!isNaN(first) && !isNaN(second)) {
+                    try {
+                        return Number(first) + Number(second);
+                    } catch (e) {
+                        console.log("One of the values is not supposed to be a number. \nReturning result\n");
+                        return String(first + second);
+                    }
+                } else {
+                    console.log("There is a problem with | AddValues | One of arguments is NaN\n");
+                }
             }
             else {
                 return String(first + second);
@@ -59,7 +68,7 @@ const Task2Lib = {
             case 'bigint':
                 return BigInt(value);
             default:
-                throw new Error(`Unsupported type for this valuee -> [ ${value} ]`);
+                throw new Error(`Unsupported type for this value -> [ ${value} ]`);
         }
     }
 };

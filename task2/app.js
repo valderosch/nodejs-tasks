@@ -1,20 +1,16 @@
 const Task2Lib = {
     addValues: function (first = "JS", second = "Land") {
         try{
-            if(typeof first === 'number' || typeof second === 'number'){
-                if(!isNaN(first) && !isNaN(second)) {
-                    try {
-                        return Number(first) + Number(second);
-                    } catch (e) {
-                        console.log("One of the values is not supposed to be a number. \nReturning result\n");
-                        return String(first + second);
-                    }
+            if (typeof first === 'number' && typeof second === 'number' && !isNaN(first) && !isNaN(second)) {
+                return Number(first) + Number(second);
+            } else {
+                if (typeof first === 'string' || typeof second === 'string') {
+                    console.log("There is a problem with | addValues | Arguments are not numbers\n");
+                    return String(first) + String(second);
                 } else {
-                    console.log("There is a problem with | AddValues | One of arguments is NaN\n");
+                    console.log("There is a problem with | addValues | Invalid arguments type\n");
+                    return 'NaN | undefined | null';
                 }
-            }
-            else {
-                return String(first + second);
             }
         } catch (e) {
             console.log("There is a problem with | AddValues |\n" + e)

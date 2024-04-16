@@ -35,7 +35,7 @@ const Task2Lib = {
         }
         return !value;
     },
-    convertToNumber: function (value ) {
+    convertToNumber: function (value = 'Empty Argument') {
         switch (typeof value){
             case "boolean":
                 return value ? 1 : 0;
@@ -58,16 +58,36 @@ const Task2Lib = {
                 return 'Unsupported type'
         }
     },
-    coerceToType: function (value = 'SadEmptyValue', type = 'string') {
+    coerceToType: function (value = 'Empty Value Argument', type = 'string') {
         switch (type) {
             case 'string':
-                return String(value);
+                try{
+                    return String(value);
+                } catch (e) {
+                    console.log('There is a problem with | CoerceToType | Converting to string is failed')
+                }
+                break;
             case 'number':
-                return this.convertToNumber(value);
+                try{
+                    return this.convertToNumber(value);
+                } catch (e) {
+                    console.log('There is a problem with | CoerceToType | Converting to number is failed')
+                }
+                break;
             case 'boolean':
-                return Boolean(value);
+                try{
+                    return Boolean(value);
+                } catch (e) {
+                    console.log('There is a problem with | CoerceToType | Converting to boolean is failed')
+                }
+                break;
             case 'bigint':
-                return BigInt(value);
+                try{
+                    return BigInt(value);
+                } catch (e) {
+                    console.log('There is a problem with | CoerceToType | Converting to bigInt is failed')
+                }
+                break;
             default:
                 throw new Error(`Unsupported type for this value -> [ ${value} ]`);
         }

@@ -15,9 +15,15 @@ const Task2Lib = {
             console.log("There is a problem with | AddValues |\n" + e)
         }
     },
-    stringifyValue: function (value = "SadEmptyString") {
+    stringifyValue: function (value = "Empty Argument") {
         try {
-            return typeof value === 'object' || Array.isArray(value) ? JSON.stringify(value) : String(value);
+            if (value === null || typeof value === 'undefined') {
+                return "Unsupported value type: " + String(value);
+            }
+            if (typeof value === 'number' && isNaN(value)) {
+                return "Unsupported value type: NaN";
+            }
+            return (typeof value === 'object' || Array.isArray(value)) ? JSON.stringify(value) : String(value);
         } catch (e) {
             console.log("There is a problem with | stringifyValue |\n" + e);
         }

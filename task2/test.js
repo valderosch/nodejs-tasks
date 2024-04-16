@@ -20,11 +20,12 @@ console.log(lib.stringifyValue(NaN));
 console.log(lib.stringifyValue(undefined));
 console.log(lib.stringifyValue());
 console.log(lib.stringifyValue({ key: 'value' }));
+console.log(lib.stringifyValue(null));
 
 //invertBoolean
 console.log('===============\n\n [ InvertBoolean ]');
 console.log(lib.invertBoolean(true));
-console.log(lib.invertBoolean('some_text_with_no_sense'));
+// console.log(lib.invertBoolean('some_text_with_no_sense'));
 
 //convertToNumber
 console.log('===============\n\n [ ConvertToNumber ]');

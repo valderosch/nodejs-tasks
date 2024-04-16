@@ -1,15 +1,14 @@
 const Task2Lib = {
-    addValues: function (first = "JS", second = "Land") {
+    addValues: function (first = "Empty ", second = "Arguments") {
         try{
             if (typeof first === 'number' && typeof second === 'number' && !isNaN(first) && !isNaN(second)) {
-                return Number(first) + Number(second);
+                return first + second;
             } else {
-                if (typeof first === 'string' || typeof second === 'string') {
-                    console.log("There is a problem with | addValues | Arguments are not numbers\n");
-                    return String(first) + String(second);
+                if (typeof first === 'string' && typeof second === 'string') {
+                    return first + second;
                 } else {
-                    console.log("There is a problem with | addValues | Invalid arguments type\n");
-                    return 'NaN | undefined | null';
+                    console.log("There is a problem with | addValues | Invalid arguments types.\n");
+                    return 'Unsupported data types';
                 }
             }
         } catch (e) {

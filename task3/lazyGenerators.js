@@ -1,40 +1,46 @@
 // Lazy Evaluation and Generators functions
-const lazyMap = (array, func) => {
+function lazyMap(array, func) {
     let index = 0;
-    return () => {
-        if (index < array.length) {
-            return func(array[index++]);
+    return {
+        next: function() {
+            if (index < array.length) {
+                return func(array[index++]);
+            } else {
+                console.log('Finished LazyMapping');
+                return 0;
+            }
         }
-        return 0;
     };
-};
+}
 
-const fibonacciGenerator = () => {
+function fibonacciGenerator() {
     let first = 0, second = 1;
-    return () => {
-        const nextFibValue = first + second;
-        first = second;
-        second = nextFibValue;
-        return nextFibValue;
+    return {
+        next: function() {
+            const nextFibValue = first + second;
+            first = second;
+            second = nextFibValue;
+            return nextFibValue;
+        }
     };
-};
+}
 
-const array = [10, 22, 34, 44, 50, 72, 30];
-const mathFunc = (num) => num * 2 ;
+const array = [10, 22, 34, 50];
+const mapFunc = num => num * 2;
 
-const lazyMapper = lazyMap(array, mathFunc);
-console.log(`Lazy Load Mapping ${lazyMapper()}`);
-console.log(`Lazy Load Mapping ${lazyMapper()}`);
-console.log(`Lazy Load Mapping ${lazyMapper()}`);
-console.log(`Lazy Load Mapping ${lazyMapper()}`);
-console.log(`Lazy Load Mapping ${lazyMapper()}`);
-console.log(`Lazy Load Mapping ${lazyMapper()}`);
-console.log(`Lazy Load Mapping ${lazyMapper()}`);
-console.log(`Lazy Load Mapping ${lazyMapper()}\n\n`);
+const LazyGenerator = lazyMap(array, mapFunc);
+console.log('LazyMap Generator\n___________________');
+console.log(LazyGenerator.next());
+console.log(LazyGenerator.next());
+console.log(LazyGenerator.next());
+console.log(LazyGenerator.next());
+console.log(LazyGenerator.next());
 
-const lazyEvalFibonacciGenerator = fibonacciGenerator();
-console.log(`Fibonacci: ${lazyEvalFibonacciGenerator()}`);
-console.log(`Fibonacci: ${lazyEvalFibonacciGenerator()}`);
-console.log(`Fibonacci: ${lazyEvalFibonacciGenerator()}`);
-console.log(`Fibonacci: ${lazyEvalFibonacciGenerator()}`);
-console.log(`Fibonacci: ${lazyEvalFibonacciGenerator()}`);
+
+const LazyFibonacci = fibonacciGenerator();
+console.log('Fibonacci Generator\n___________________');
+console.log(LazyFibonacci.next());
+console.log(LazyFibonacci.next());
+console.log(LazyFibonacci.next());
+console.log(LazyFibonacci.next());
+console.log(LazyFibonacci.next());

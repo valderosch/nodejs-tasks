@@ -25,6 +25,9 @@ console.log(lib.stringifyValue(null));
 //invertBoolean
 console.log('===============\n\n [ InvertBoolean ]');
 console.log(lib.invertBoolean(true));
+// console.log(lib.invertBoolean(null));
+// console.log(lib.invertBoolean(undefined));
+// console.log(lib.invertBoolean(NaN));
 // console.log(lib.invertBoolean('some_text_with_no_sense'));
 
 //convertToNumber
@@ -33,6 +36,8 @@ console.log(lib.convertToNumber("168554.44"));
 console.log(lib.convertToNumber("99998888444"));
 console.log(lib.convertToNumber("some_text"));
 console.log(lib.convertToNumber(true));
+console.log(lib.convertToNumber(null));
+// console.log(lib.convertToNumber(NaN));
 console.log(lib.convertToNumber(undefined));
 console.log(lib.convertToNumber({name: "Albert"}));
 console.log(lib.convertToNumber(['row', 'text', 'data', 111]));

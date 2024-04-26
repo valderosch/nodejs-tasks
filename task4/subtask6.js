@@ -21,7 +21,6 @@ function deepCloneObject(obj, objClonesArr = new WeakMap()) {
             objClone[key] = deepCloneObject(obj[key], objClonesArr);
         }
     }
-
     return objClone;
 }
 
@@ -31,9 +30,31 @@ const originalObj = {
     d: { e: { f: 5 } }
 };
 
+const originalObj2 = {
+    team: ['Rogue', 'RevoX', 'Ly'],
+    nums: [2, 3, { c: 4 }],
+    words: { car: { color: 'yellow' }, plane: {weight: 'light'}}
+};
+
+const originalObjEmpty = {
+    team: [],
+    nums: [],
+    words: {}
+};
+
 originalObj.circularRef = originalObj;
 
 const clonedObj = deepCloneObject(originalObj);
 
 console.log("Cloned: ", originalObj);
 console.log("Cloned: ", clonedObj);
+
+const clonedObj2 = deepCloneObject(originalObj2);
+
+console.log("Cloned: ", originalObj2);
+console.log("Cloned: ", clonedObj2);
+
+const clonedObjEmpty = deepCloneObject(originalObjEmpty);
+
+console.log("Cloned: ", originalObjEmpty);
+console.log("Cloned: ", clonedObjEmpty);

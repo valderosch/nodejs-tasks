@@ -46,12 +46,12 @@ const Task2Lib = {
                     return value.length >= 1 ? 1 : 0;
                 }
                 return number;
-
             case "undefined":
+                console.log('There is a problem with | convertToNumber | Undefined value is not a number');
                 return 0;
             case 'number':
                 if (isNaN(value)) {
-                    throw new Error(`Its not possible to convert [ ${value} ] to number`);
+                    throw new Error(`Its not possible to convert [ NaN ] to number`);
                 }
                 return Number(value);
             default:

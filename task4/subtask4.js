@@ -27,5 +27,6 @@ function createImmutableObject(obj) {
 }
 
 const immutablePerson = createImmutableObject(person);
-
-console.log(immutablePerson);
+console.log("Before Mutation", immutablePerson);
+immutablePerson.firstName = "Jane";
+console.log("After mutation",immutablePerson);

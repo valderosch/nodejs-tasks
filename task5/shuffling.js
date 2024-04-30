@@ -1,27 +1,17 @@
-function chunkArray(array, chunkSize) {
-    const resultArray = [];
-
-    for (let i = 0; i < array.length; i += chunkSize) {
-        const chunk = array.slice(i, i + chunkSize);
-        resultArray.push(chunk);
+function customShuffle(array) {
+    const shuffledArray = [...array];
+    //Fisher-Yates shuffle algorithm
+    for (let i = shuffledArray.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
     }
 
-    return resultArray;
+    return shuffledArray;
 }
 
-const arr1 = [122, 222, 311, 40, 54, 67, 75, 877, 999];
-const arr2 = ['first', 'second', 'thirf', 'fourth', 'fifth', 'sixth', 'seventh', 'eight', 'last'];
-const chunked1 = chunkArray(arr1, 3);
-const chunked2 = chunkArray(arr2, 3);
-const arrMerged = chunked1.concat(chunked2);
-const chunked3 = chunkArray(arrMerged, 2);
-
-
-console.log(chunked1);
-console.log(chunked2);
-console.log(chunked3);
-
-
+const arr = [33, 'not apple', 42, 'apple', 'bananas', 222];
+const shuffled = customShuffle(arr);
+console.log(shuffled);
 
 
 

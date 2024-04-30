@@ -1,20 +1,32 @@
-function customFilterUnique(array, keyExtractor) {
+function customFilterUnique(array, isUnique) {
     const uniqueElements = [];
-    const checkedElements = new Set();
 
-    array.forEach(item => {
-        const key = keyExtractor(item);
-        if (!checkedElements.has(key)) {
-            checkedElements.add(key);
-            uniqueElements.push(item);
+    for (let i = 0; i < array.length; i++) {
+        const currentItem = array[i];
+        let isDuplicate = false;
+
+        for (let j = 0; j < array.length; j++) {
+            if (i !== j && isUnique(currentItem, array[j])) {
+                isDuplicate = true;
+                break;
+            }
         }
-    });
+
+        if (!isDuplicate) {
+            uniqueElements.push(currentItem);
+        }
+    }
 
     return uniqueElements;
 }
 
-const getId = obj => obj.id;
 
+function isUnique(item, newItem) {
+    if (typeof item === 'object' && typeof newItem === 'object') {
+        return item.id === newItem.id;
+    }
+    return item === newItem;
+}
 
 // test data
 const objectsArray = [
@@ -29,6 +41,12 @@ const objectsArray = [
     { id: 4, name: 'Last' },
 
 ];
+const numArray = [54, 34, 33, 54, 11];
+const wordArray = ['apple', 'not apple', 'bones', 'apple', 'bananas'];
 
-const uniqueObjects = customFilterUnique(objectsArray, getId);
+const uniqueObjects = customFilterUnique(objectsArray, isUnique);
 console.log(uniqueObjects);
+const uniqueNumbers = customFilterUnique(numArray, isUnique);
+console.log(uniqueNumbers);
+const uniqueWords = customFilterUnique(wordArray, isUnique);
+console.log(uniqueWords);

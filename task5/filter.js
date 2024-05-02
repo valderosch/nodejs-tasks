@@ -1,52 +1,25 @@
-function customFilterUnique(array, isUnique) {
-    const uniqueElements = [];
+function customFilterUnique(array, callback) {
+    const counts = {};
 
-    for (let i = 0; i < array.length; i++) {
-        const currentItem = array[i];
-        let isDuplicate = false;
-
-        for (let j = 0; j < array.length; j++) {
-            if (i !== j && isUnique(currentItem, array[j])) {
-                isDuplicate = true;
-                break;
-            }
-        }
-
-        if (!isDuplicate) {
-            uniqueElements.push(currentItem);
-        }
-    }
-
-    return uniqueElements;
+    array.forEach(item => {
+        const id = callback(item);
+        counts[id] = (counts[id] || 0) + 1;
+    });
+    return array.filter(item => counts[callback(item)] === 1);
 }
 
-
-function isUnique(item, newItem) {
-    if (typeof item === 'object' && typeof newItem === 'object') {
-        return item.id === newItem.id;
-    }
-    return item === newItem;
-}
-
-// test data
-const objectsArray = [
-    { id: 1, name: 'One' },
-    { id: 6, name: 'One' },
-    { id: 1, name: 'One' },
-    { id: 2, name: 'Second' },
-    { id: 3, name: 'Fifty' },
-    { id: 4, name: 'Twenty' },
-    { id: 5, name: 'One' },
-    { id: 2, name: 'Some' },
-    { id: 4, name: 'Last' },
-
+// Test
+arr1 = [
+    {id:1, name: 'Test'},
+    {id:2, name: 'Foo'},
+    {id:3, boo: 3},
+    {id:2, isAdmin: false},
 ];
-const numArray = [54, 34, 33, 54, 11];
-const wordArray = ['apple', 'not apple', 'bones', 'apple', 'bananas'];
+arr2 = [1, 2, 'a', 'b', 2, 'b', 3];
 
-const uniqueObjects = customFilterUnique(objectsArray, isUnique);
-console.log(uniqueObjects);
-const uniqueNumbers = customFilterUnique(numArray, isUnique);
-console.log(uniqueNumbers);
-const uniqueWords = customFilterUnique(wordArray, isUnique);
-console.log(uniqueWords);
+
+console.log(customFilterUnique(arr1, el => el.id))
+console.log(customFilterUnique(arr2, el => el))
+
+// [{id:1, name: 'Test'}, {id:3, boo: 3},]
+// [1, 3, 'a']
